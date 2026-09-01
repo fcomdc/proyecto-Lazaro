@@ -1,0 +1,6 @@
+@LazaroBackend_HostAddress = http://localhost:5016
+
+GET {{LazaroBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
