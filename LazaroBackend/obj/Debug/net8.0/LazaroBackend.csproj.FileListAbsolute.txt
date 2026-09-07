@@ -144,3 +144,5 @@ C:\Users\fm469\OneDrive\Documents\Tesis\Proyecto Lazaro\LazaroBackend\obj\Debug\
 C:\Users\fm469\OneDrive\Documents\Tesis\Proyecto Lazaro\LazaroBackend\obj\Debug\net8.0\LazaroBackend.pdb
 C:\Users\fm469\OneDrive\Documents\Tesis\Proyecto Lazaro\LazaroBackend\obj\Debug\net8.0\LazaroBackend.genruntimeconfig.cache
 C:\Users\fm469\OneDrive\Documents\Tesis\Proyecto Lazaro\LazaroBackend\obj\Debug\net8.0\ref\LazaroBackend.dll
+C:\Users\fm469\OneDrive\Documents\Tesis\Proyecto Lazaro\LazaroBackend\obj\Debug\net8.0\LazaroBackend.sourcelink.json
+C:\Users\fm469\OneDrive\Documents\Tesis\Proyecto Lazaro\LazaroBackend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

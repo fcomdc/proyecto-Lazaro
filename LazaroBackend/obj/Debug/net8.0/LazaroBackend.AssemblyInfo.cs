@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LazaroBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ba75419e89404c1a3eb4bb99ca4f91e99d1408f")]
 [assembly: System.Reflection.AssemblyProductAttribute("LazaroBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LazaroBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

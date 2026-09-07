@@ -1,83 +1,28 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useAuth } from '../context/AuthContext';
+import AuthNavigator from './AuthNavigator';
+import PatientNavigator from './PatientNavigator';
+import AdminNavigator from './AdminNavigator';
 
-import Dashboard from '../components/Dashboard';
-import PatientList from '../components/PatientList';
-import DoctorList from '../components/DoctorList';
-import AppointmentList from '../components/AppointmentList';
-import EmergencyList from '../components/EmergencyList';
-import TriageList from '../components/TriageList';
-import HospitalizationList from '../components/HospitalizationList';
-import MedicalHistoryList from '../components/MedicalHistoryList';
-import UserList from '../components/UserList';
+const AppNavigator: React.FC = () => {
+  const { usuario } = useAuth();
 
-const Tab = createBottomTabNavigator();
+  // Si no hay sesión iniciada, mostrar flujo de Autenticación
+  if (!usuario) {
+    return <AuthNavigator />;
+  }
 
-const screenOptions = {
-  tabBarActiveTintColor: '#007bff',
-  tabBarInactiveTintColor: '#6c757d',
-  headerStyle: {
-    backgroundColor: '#007bff',
-  },
-  headerTintColor: '#fff',
-  headerTitleStyle: {
-    fontWeight: 'bold' as const,
-  },
-  tabBarStyle: {
-    backgroundColor: '#ffffff',
-  },
-};
+  // Según la sección 6 del PDF:
+  if (usuario.rol === 'ADMINISTRADOR') {
+    return <AdminNavigator />;
+  }
 
-const AppNavigator = () => {
-  return (
-    <Tab.Navigator screenOptions={screenOptions}>
-      <Tab.Screen
-        name="Inicio"
-        component={Dashboard}
-        options={{ title: '🏠 Inicio' }}
-      />
-      <Tab.Screen
-        name="Pacientes"
-        component={PatientList}
-        options={{ title: '👤 Pacientes' }}
-      />
-      <Tab.Screen
-        name="Médicos"
-        component={DoctorList}
-        options={{ title: '👨‍⚕️ Médicos' }}
-      />
-      <Tab.Screen
-        name="Citas"
-        component={AppointmentList}
-        options={{ title: '📅 Citas' }}
-      />
-      <Tab.Screen
-        name="Emergencias"
-        component={EmergencyList}
-        options={{ title: '🚨 Emergencias' }}
-      />
-      <Tab.Screen
-        name="Triaje"
-        component={TriageList}
-        options={{ title: '🩺 Triaje' }}
-      />
-      <Tab.Screen
-        name="Salas"
-        component={HospitalizationList}
-        options={{ title: '🏥 Hospitalización' }}
-      />
-      <Tab.Screen
-        name="Historial"
-        component={MedicalHistoryList}
-        options={{ title: '📜 Historial' }}
-      />
-      <Tab.Screen
-        name="Usuarios"
-        component={UserList}
-        options={{ title: '⚙️ Usuarios' }}
-      />
-    </Tab.Navigator>
-  );
+  if (usuario.rol === 'PACIENTE') {
+    return <PatientNavigator />;
+  }
+
+  // Roles hospitalarios autorizados (Médico, Recepcionista, Enfermero)
+  return <AdminNavigator />;
 };
 
 export default AppNavigator;

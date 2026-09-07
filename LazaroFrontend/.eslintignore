@@ -1,0 +1,7 @@
+dist/
+node_modules/
+android/
+ios/
+*.bundle.js
+bundle.web.js
+

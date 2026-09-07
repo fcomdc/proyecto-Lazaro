@@ -1,4 +1,4 @@
-﻿using LazaroBackend.Models;
+using LazaroBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -58,5 +58,40 @@ namespace LazaroBackend.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+        [HttpPost("login")]
+        public async Task<ActionResult<Usuario>> Login([FromBody] LoginRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.NombreUsuario) || string.IsNullOrWhiteSpace(request.Password))
+            {
+                return BadRequest(new { mensaje = "Nombre de usuario y contraseña son requeridos" });
+            }
+
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.Activo && u.NombreUsuario.ToLower() == request.NombreUsuario.ToLower().Trim());
+
+            if (usuario == null)
+            {
+                return Unauthorized(new { mensaje = "Credenciales incorrectas" });
+            }
+
+            // Validación simple o hash
+            if (usuario.PasswordHash != request.Password && !BCryptVerifyOrDirect(usuario.PasswordHash, request.Password))
+            {
+                return Unauthorized(new { mensaje = "Credenciales incorrectas" });
+            }
+
+            return Ok(usuario);
+        }
+
+        private static bool BCryptVerifyOrDirect(string storedHash, string inputPassword)
+        {
+            return storedHash == inputPassword;
+        }
+    }
+
+    public class LoginRequest
+    {
+        public string NombreUsuario { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }
